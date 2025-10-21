@@ -1,0 +1,222 @@
+html,
+body,
+#root {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    color: #333;
+    /* Okunurluk için varsayılan metin rengi */
+}
+
+/* Sayfa kapsayıcısı: Tam ekran, animasyonlu arka plan */
+.page-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    width: 100vw;
+    padding: 20px;
+    box-sizing: border-box;
+
+    background: linear-gradient(-45deg, #17ff0f, #2168d3, #15c5ff, #d9e4f5);
+    background-size: 400% 400%;
+    animation: gradientShift 15s ease infinite;
+    transition: background 0.5s ease-in-out;
+}
+
+/* Arka plan renk geçişi animasyonu */
+@keyframes gradientShift {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Logo ve animasyonu */
+.logo {
+    margin-bottom: 20px;
+    animation: floatLogo 3s ease-in-out infinite;
+}
+
+.logo img {
+    width: clamp(80px, 10vw, 120px);    
+    /* Ekran boyutuna göre logoyu ayarlar */
+    height: clamp(80px, 10vw, 120px);
+}
+
+/* Logo kaydırma animasyonu */
+@keyframes floatLogo {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+/* Giriş kutusu (login-box) stilleri */
+.login-box {
+    background: #ffffffcc;
+    padding: clamp(20px, 5vw, 35px);
+    /* İç boşluğu (padding) duyarlı hale getirir */
+    border-radius: 20px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+    width: 100%;
+    max-width: 380px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    backdrop-filter: blur(8px);
+    animation: popUp 0.5s ease forwards;
+}
+
+/* Giriş kutusu görünüm animasyonu */
+@keyframes popUp {
+    0% {
+        opacity: 0;
+        transform: translateY(20px) scale(0.95);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Rol düğmeleri (flexbox ile sıralı ve sarmalanabilir) */
+.role-buttons {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+    /* Gerekirse alt satıra geçer */
+    gap: 10px;
+}
+
+.role-button {
+    padding: 12px clamp(15px, 4vw, 25px);
+    /* Genişlik duyarlı hale getirildi */
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+    color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    font-size: clamp(14px, 3.5vw, 16px);
+    /* Font boyutu duyarlı hale getirildi */
+}
+
+.role-button.active {
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
+}
+
+.role-button:not(.active):hover {
+    background: linear-gradient(135deg, #2575fc 0%, #6a11cb 100%);
+    transform: scale(1.03);
+}
+
+/* Giriş alanları (input) stilleri */
+input[type="number"],
+input[type="text"],
+input[type="password"] {
+    padding: 12px;
+    margin-bottom: 12px;
+    border-radius: 12px;
+    border: 1px solid #aaa;
+    width: 100%;
+    box-sizing: border-box;
+    font-size: clamp(14px, 4vw, 16px);
+    /* Font boyutu duyarlı hale getirildi */
+    transition: all 0.3s ease;
+}
+
+input:focus {
+    outline: none;
+    border-color: #2575fc;
+    box-shadow: 0 0 10px #2575fc66;
+}
+
+/* Giriş düğmesi (login-button) stilleri */
+.login-button {
+    padding: 12px;
+    margin-top: 10px;
+    width: 100%;
+    font-size: clamp(16px, 4.5vw, 18px);
+    /* Font boyutu duyarlı hale getirildi */
+    font-weight: bold;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    background: linear-gradient(135deg, #ff512f 0%, #dd2476 100%);
+    color: #fff;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+.login-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
+}
+
+/* Durum mesajı stilleri */
+.status-message {
+    margin-top: 15px;
+    font-weight: bold;
+    font-size: clamp(14px, 3.5vw, 16px);
+    /* Font boyutu duyarlı hale getirildi */
+    text-align: center;
+    color: #2575fc;
+}
+
+/* Ek olarak, genel duyarlılık için medya sorguları */
+@media (max-width: 768px) {
+    .page-container {
+        padding: 15px;
+    }
+
+    .login-box {
+        padding: 25px;
+    }
+
+    .password-group {
+        position: relative;
+    }
+
+    .password-group input {
+        padding-right: 80px;
+        /* 👈 Bu san düwmäniň ýazgysyna görä üýtgedilip bilner */
+    }
+
+    .toggle-password-button {
+        position: absolute;
+        right: 1px;
+        top: 57%;
+        transform: translateY(-50%);
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-size: 0.9em;
+        color: #007bff;
+        /* Mawy reňk goşdum has gowy görünmesi üçin */
+        outline: none;
+        font-weight: bold;
+    }
+}

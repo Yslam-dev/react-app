@@ -1,0 +1,766 @@
+        :root {
+        --primary-color: #4ca0af;
+        --secondary-color: #f6d365;
+        --dark-text: #333;
+        --light-text: #fff;
+        --card-bg: #fff;
+        --card-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        --border-color: #d1d5db;
+    }
+
+    /* San giriş meýdanlaryndaky ýokary/aşak oklary aýyrmak */
+    input[type="number"]::-webkit-outer-spin-button,
+    input[type="number"]::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    /* Gradient fonyň animasiýasy üçin ana-kareler (keyframes) */
+    @keyframes gradientShift {
+        0% {
+            background-position: 0% 50%;
+        }
+
+        50% {
+            background-position: 100% 50%;
+        }
+
+        100% {
+            background-position: 0% 50%;
+        }
+    }
+
+    .app-bg {
+        min-height: 100vh;
+        width: 100vw;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        background: linear-gradient(-45deg, #17ff0f, #2168d3, #15c5ff, #d9e4f5);
+        background-size: 400% 400%;
+        animation: gradientShift 15s ease infinite;
+        transition: background 0.5s ease-in-out;
+    }
+
+    .main-container {
+        /* flex: 1 aýryldy - merkezi ýerleşişi gowulaşdyrmak üçin */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 1rem;
+        width: 100%;
+        box-sizing: border-box;
+        /* Mazmunyň beýikligine doly uýgunlaşmagyny üpjün etmek */
+        min-height: 100vh;
+    }
+
+    .review-card {
+        background-color: #f7f7f7;
+        border-radius: 12px;
+        padding: 24px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .review-item {
+        margin-bottom: 20px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid #eee;
+    }
+
+    .review-q-tema {
+        font-size: 1.1em;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 10px;
+    }
+
+    .review-answer-btn {
+        padding: 12px;
+        border-radius: 8px;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        text-align: center;
+        margin-bottom: 8px;
+    }
+
+    .review-answer-btn.correct {
+        border-color: #28a745;
+        background-color: #d4edda;
+        color: #155724;
+    }
+
+    .review-answer-btn.incorrect {
+        border-color: #dc3545;
+        background-color: #f8d7da;
+        color: #721c24;
+    }
+
+    .review-info {
+        font-size: 0.9em;
+        margin-top: 10px;
+    }
+
+    .correct-text {
+        color: #28a745;
+        font-weight: bold;
+    }
+
+    .incorrect-text {
+        color: #dc3545;
+        font-weight: bold;
+    }
+
+    .test-card,
+    .card,
+    .quiz-card {
+        background: var(--card-bg);
+        box-shadow: var(--card-shadow);
+        width: 100%;
+        border-radius: 10px;
+        max-width: 450px;
+        box-sizing: border-box;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        border: solid black 0.5px;
+        margin-bottom: 0;
+        /* !important aýryldy */
+        padding: 1rem 1.5rem;
+    }
+
+    .card:hover,
+    .quiz-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    .input-field {
+        width: 100%;
+        padding: 0.75rem 1rem;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        margin-bottom: 1rem;
+        font-size: 1rem;
+        outline: none;
+        background-color: #fff;
+    }
+
+    .input-field.first:focus {
+        border: 1px solid #22c55e;
+    }
+
+
+    .btn {
+        background: #45a049;
+        border: none;
+        cursor: pointer;
+        border-radius: 8px;
+        font-weight: 600;
+        padding: 0.75rem 1.5rem;
+        transition: background 0.2s ease, transform 0.2s ease;
+        color: white;
+    }
+
+    .header-title {
+        text-align: center;
+
+        /* 🔥 DÜZEDIŞ 1: Has uly gymmat we !important ulanyň */
+        margin-top: 9rem !important;
+        /* Ýeterlik aşak düşmegi üçin gymmaty ulaldyň */
+
+        margin-bottom: 1.5rem;
+        font-size: 1.8rem;
+        color: var(--primary-color, #262424);
+    }
+
+    .header-info {
+        /* Eger bu h1-iň daşyndaky esasy konteýner bolsa */
+        padding-top: 3rem;
+        /* Içki boşlugy ulaldyň */
+        padding-bottom: 1rem;
+        text-align: center;
+        /* H1-i ortalamak üçin */
+    }
+
+    /* Mysal üçin, Mugallym Paneli üçin esasy header konteýneri */
+
+
+    .btn-logout-fixed {
+        position: fixed;
+        /* Ekranyň bir ýerinde hemişe durar ýaly */
+        top: 1rem;
+        /* Ýokardan aralyk */
+        left: 1rem;
+        /* Çepden aralyk */
+        z-index: 100;
+        /* Beýleki elementleriň üstünde dursun */
+    }
+
+    .btn:hover {
+        color: white;
+        background-color: rgb(22, 187, 93);
+    }
+
+    .btn-green {
+        background: var(--primary-color);
+        color: var(--light-text);
+    }
+
+    .btn-green:hover {
+        background: #45a049;
+    }
+
+    .btn-gray {
+        background: #e5e7eb;
+        color: var(--dark-text);
+    }
+
+    .btn-gray:hover {
+        background: #d1d5db;
+    }
+
+    .button-bottom {
+        display: flex;
+        gap: 1rem;
+        margin-bottom: 2rem;
+    }
+
+    .button-row {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+    }
+
+    .answers-container {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+
+    .home-add-btn {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background-color: var(--primary-color);
+        color: var(--light-text);
+        font-size: 2rem;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        align-self: center;
+        position: fixed;
+        bottom: 2rem;
+        right: 2rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .home-add-btn:hover {
+        transform: scale(1.1);
+        box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .card-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        /* !important aýryldy */
+        width: 100%;
+        max-height: 70vh;
+        overflow-y: auto;
+        padding-bottom: 6rem;
+    }
+
+    .card-two-column-layout {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 1.5rem;
+        padding: 1rem 1.5rem;
+    }
+
+    .column-left {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+        flex: 1;
+    }
+
+    .column-right {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 0.5rem;
+        flex: 1;
+    }
+
+    .tema-wrap {
+        font-weight: 600;
+        color: var(--dark-text);
+        word-break: break-word;
+        font-size: 0.95rem;
+    }
+
+    .count {
+        font-weight: 700;
+        color: #6366f1;
+        font-size: 1rem;
+        white-space: nowrap;
+    }
+
+    .ugrat-btn {
+        background: #24ce1e;
+        color: var(--light-text);
+        padding: 0.4rem 0.8rem;
+        font-size: 0.85rem;
+        border-radius: 8px;
+        border: none;
+        cursor: pointer;
+        transition: 1,8s;
+    }
+
+    .ugrat-btn:hover {
+        background: #1e8f1a;
+    }
+
+    .delete-btn {
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-size: 1.2rem;
+        color: #ef4444;
+    }
+
+    .delete-btn:hover {
+        transform: scale(1.1);
+        color: #b91c1c;
+    }
+
+    .timer-setup h2 {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: var(--dark-text);
+        margin-bottom: 1.5rem;
+    }
+
+    .timer-info-item {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        margin-bottom: 1rem;
+    }
+
+    .timer-info-item label {
+        font-weight: 600;
+        margin-bottom: 0.25rem;
+        color: #555;
+    }
+
+    .quiz-card {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 100%;
+        min-height: 400px;
+    }
+
+    .quiz-question {
+        font-size: 1.3rem;
+        font-weight: 600;
+        margin-bottom: 1.5rem;
+        color: var(--dark-text);
+    }
+
+    .quiz-answers-container {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .quiz-answer-btn {
+        width: 100%;
+        padding: 0.75rem;
+        border-radius: 8px;
+        border: 1px solid #ddd;
+        background-color: #f8f8f8;
+        color: var(--dark-text);
+        text-align: left;
+        transition: background-color 0.2s, border-color 0.2s;
+    }
+
+    .quiz-answer-btn:hover {
+        background-color: #e8e8e8;
+        border-color: #ccc;
+    }
+
+    .quiz-buttons {
+        margin-top: 2rem;
+        justify-content: flex-end;
+    }
+
+    .results-container {
+        width: 100%;
+        max-width: 900px;
+        margin: 0 auto;
+        background: var(--card-bg);
+        padding: 1.5rem;
+        border-radius: 12px;
+        box-shadow: var(--card-shadow);
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .results-container h2 {
+        text-align: center;
+        font-size: 1.75rem;
+        font-weight: bold;
+        color: var(--dark-text);
+        margin-bottom: 1.5rem;
+    }
+
+    .result-item {
+        margin-bottom: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .result-question-text {
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--dark-text);
+        margin-bottom: 0;
+        word-wrap: break-word;
+        word-break: break-word;
+        overflow-wrap: break-word;
+    }
+
+    .result-answers-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .result-answer-text {
+        font-size: 0.9rem;
+        color: #555;
+        margin: 0;
+        padding: 0;
+        background-color: #f0f0f0;
+        border-radius: 4px;
+        word-break: break-word;
+    }
+
+    .back-to-home {
+        display: block;
+        margin-top: 2rem;
+        width: 100%;
+    }
+
+    .modal-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.5);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 50;
+    }
+
+    .modal-content {
+        background: white;
+        padding: 2rem;
+        border-radius: 1rem;
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .modal-text {
+        font-size: 1.125rem;
+        color: #374151;
+        margin-bottom: 1rem;
+    }
+
+    .timer-display {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #047857;
+    }
+
+    .role-select-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
+        padding: 2rem;
+    }
+
+    .role-title {
+        font-size: 1.75rem;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 1rem;
+    }
+
+    .full-width-btn {
+        width: 100%;
+    }
+
+    .mugallym-info {
+        font-size: 0.8rem;
+        color: #666;
+        margin-bottom: 0.25rem;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .mugallym-info span {
+        font-weight: 500;
+    }
+
+    .date-info {
+        font-size: 0.75rem;
+        color: #999;
+    }
+
+    .back-btn {
+        position: fixed;
+        top: 1rem;
+        left: 1rem;
+        background: none;
+        border: none;
+        color: #333;
+        font-size: 1rem;
+        cursor: pointer;
+        font-weight: bold;
+    }
+
+    .back-btn:hover {
+        color: #6366f1;
+    }
+
+    .no-tests-message {
+        text-align: center;
+        font-size: 1.2rem;
+        color: #777;
+        margin-top: 2rem;
+    }
+
+    /* ÇYKYŞ DÜWMESI (Talaba laýyk ol ýokarda we sagda fiksirlendi) */
+    .logout-btn {
+        position: fixed;
+        top: 1.5rem;
+        /* Ýokardan aralyk */
+        left: 1.5rem;
+        /* Çepden aralyk */
+
+        /* 🔥 DÜZEDIŞ: Düwmäniň giňligini diňe mazmuny boýunça sazlaýar. */
+        width: fit-content;
+        display: block;
+        /* Ýa-da display: inline-block; */
+
+        background-color: #ef4444;
+        color: var(--light-text);
+        border: none;
+        border-radius: 8px;
+        padding: 0.5rem 1rem;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        transition: background-color 0.2s ease, transform 0.2s ease;
+        z-index: 100;
+    }
+
+    .logout-btn:hover {
+        background-color: #dc2626;
+        transform: translateY(-1px);
+    }
+
+    /* ÇYKYŞ DÜWMESI GUTARDY */
+
+
+    @media (min-width: 768px) {
+        .main-container {
+            padding: 3rem;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .card,
+        .test-card,
+        .quiz-card {
+            padding: 2.5rem;
+            max-width: 600px;
+        }
+
+        .test-card {
+            padding: 0.2rem 1.5rem;
+        }
+
+        .card-grid {
+            justify-content: center;
+            align-items: center;
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            /* !important aýryldy */
+            width: 100%;
+        }
+
+        .input-field {
+            font-size: 1.1rem;
+            padding: 1rem 1.25rem;
+        }
+
+        .btn,
+        .home-add-btn {
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+        }
+
+        /* MEDIA QUERY ÜÇIN ÇYKYŞ DÜWMESINIŇ GÖWRÜMI */
+        .logout-btn {
+            top: 2rem;
+            right: 2rem;
+            padding: 0.75rem 1.5rem;
+            font-size: 1.1rem;
+        }
+    }
+
+    /* Bu stili CSS faýlyňyza goşuň (eger Tailwind ýa-da başga framework ulanýan bolsaňyz) */
+    .textarea-auto-height {
+        resize: vertical;
+        /* Bu ulanýan tekst meýdançanyň ulanyjy tarapyndan el bilen ulaldylmagyna rugsat berýär */
+        min-height: 80px;
+        /* islegiňize görä başga stiler */
+    }
+
+    /* Ähli tekst girizilen meýdançalar üçin umumy stili (söz sargysy üçin) */
+    .textarea-full-width {
+        /* Tekst uzyn bolsa, awtomatik suratda aşaky setire geçmegi üçin */
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        /* Gerekli iň az beýikligi (120px) goşduk */
+        min-height: 120px !important;
+        /* Ulanyjy tarapyndan beýikligi üýtgetmäge rugsat bermek */
+        resize: vertical;
+        /* Doly giňlik ulanmak */
+        width: 100%;
+        box-sizing: border-box;
+        /* Padding we borderi giňlikden aýyrmazlyk */
+    }
+
+    /* Süzülmeli (scroll) bolan sorag sanawy üçin (renderAnalysis içindäki) */
+    .review-questions.edit-mode {
+        /* max-height we overflow-y React kodunyň içinde goşuldy */
+        /* Bu ýerde diňe goşmaça düzetmeler bolar, eger gerek bolsa */
+        padding: 10px;
+    }
+
+    /* renderLastFivePreview sanaw elementleri üçin */
+    .last-five-preview ul li {
+        /* Tekstleriň gysgaldylman doly görkezilmegini üpjün edýär */
+        white-space: normal;
+        word-wrap: break-word;
+        margin-bottom: 5px;
+    }
+
+    /* ------------------------------------------------ */
+    /* OWADAN YZA DÜWMELERI ÜÇIN TÄZE CSS STILLERI */
+    /* ------------------------------------------------ */
+
+    /* Umumy stil: Ýza düwmesiniň esasy görnüşi */
+    .back-btn,
+    .back-btn-inner {
+        /* Umumy düzgünler */
+        background: none;
+        /* Fon reňki ýok */
+        color: #000000;
+        /* Tekst reňki (mavi) */
+        border: none;
+        padding: 8px 12px;
+        margin-bottom: 15px;
+        /* Aşakdaky elementden daşlyk */
+        cursor: pointer;
+        font-size: 1rem;
+        font-weight: 600;
+        transition: color 0.2s ease-in-out, transform 0.2s ease-in-out;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        /* Okyň we tekstiň arasyndaky boşluk */
+
+        /* Yza ok (←) üçin has uly we göze ilginç font ulalmagy */
+        /* Meselem: ← Yza ýerine goýuň: */
+        /* content: '← ' */
+    }
+
+    /* Yza düwmesiniň üstüne gelende (hover) we basylanda (active) */
+    .back-btn:hover,
+    .back-btn-inner:hover {
+        color: #1d4ed8;
+        /* Has gara (goýy) mavi reňk */
+        /* Üstüne gelende ýa-da basylanda düwmäni birneme kiçeldip, oýnakly täsir döretmek */
+        transform: translateX(-5px);
+    }
+
+    .back-btn:active,
+    .back-btn-inner:active {
+        transform: translateX(-3px);
+        color: #0c3395;
+    }
+
+    /* Düwmeleriň ýerleşişi (eger olary dogry burça ýa-da çepe goýan bolsaňyz) */
+    /* Adatça çepe dogry goýulýar: */
+    .back-btn {
+        align-self: flex-start;
+        /* Eger kartanyň içi bolmasa */
+        margin-left: 0;
+    }
+
+    .back-btn-inner {
+        align-self: flex-start;
+        /* Kartanyň içindäki düwmeler üçin */
+        margin-left: 0;
+    }
+
+
+
+    /* Umumy Input Meýdançalary we Textarea üçin */
+    /* ------------------------------------------------ */
+    /* SORAG WE JOGAP MEÝDANÇALARY ÜÇIN DURNUKLY CSS */
+    /* ------------------------------------------------ */
+
+    /* Umumy Inputlar (Jogaplar) we Textarea (Sorag) Üçin */
+    .input-field {
+        width: 100%;
+        padding: 12px 15px;
+        margin-bottom: 12px;
+
+        /* Durnukly border we gyra */
+        border: 2px solid #ccc;
+        border-radius: 6px;
+        box-sizing: border-box;
+        font-size: 1rem;
+        color: #333;
+
+    }
