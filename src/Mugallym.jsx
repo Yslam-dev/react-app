@@ -694,10 +694,7 @@ export default function MugallymApp({ onBack }) {
     // --- Esasy Return (Doly Komponent Gurluşy) ---
     return (
         <div className="app-bg">
-            <header className="app-header"><h1 className="header-title">
-                Mugallym Paneli
-                {`(Salam, ${mugallymName || mugallymSurname || 'Mugallym'})`}
-            </h1>
+            <header className="app-header">
                 {view === 'mugallymHome' && (
                     <button onClick={handleLogout} className="logout-btn">
                         Çykyş
